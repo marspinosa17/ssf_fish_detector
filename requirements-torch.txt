@@ -1,0 +1,23 @@
+# torch/torchaudio/torchvision are deliberately kept out of requirements.txt:
+# the correct wheel depends on the target machine's CUDA version (or
+# CPU-only), so pinning a generic version here would break installs on
+# machines with a different CUDA toolkit. Install with the index URL
+# matching your CUDA version, e.g.:
+#
+#   pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+#
+# training/rtdetr_hf does not use torchaudio (all audio decoding happens in
+# preprocessing/, upstream of this module) but does need torchvision,
+# matching whatever CUDA build of torch is installed, e.g.:
+#
+#   pip install torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
+#
+# The versions below are what this environment currently has installed
+# (CUDA 12.4 build), for reference only -- verify against
+# https://pytorch.org/get-started/locally/ before installing on a new machine.
+# The HPC H200 node used for training/rtdetr_hf runs torch 2.13.0+cu130 --
+# match torchvision to that build instead.
+#
+# torch==2.6.0+cu124
+# torchaudio==2.6.0+cu124
+# torchvision==0.21.0+cu124

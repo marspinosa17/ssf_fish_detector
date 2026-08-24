@@ -1,0 +1,20 @@
+numpy==2.2.5
+pandas==2.3.3
+#opencv-python==4.13.0.92
+#simplify dependencies
+opencv-python-headless==4.13.0.92
+tqdm==4.68.3
+soundfile==0.14.0
+Pillow==12.3.0
+matplotlib==3.10.9
+
+# training/rtdetr_hf: HuggingFace RT-DETRv2 fine-tuning (see training/rtdetr_hf/README.md)
+transformers==5.9.0
+accelerate==1.14.0
+pycocotools==2.0.11
+torchmetrics==1.9.0
+tensorboard==2.21.0
+huggingface_hub==1.15.0
+scipy==1.15.3  # required by RTDetrHungarianMatcher (transformers' RT-DETR loss)
+
+# torch, torchaudio, and torchvision are intentionally NOT pinned here -- see requirements-torch.txt

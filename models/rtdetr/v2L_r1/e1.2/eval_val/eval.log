@@ -1,0 +1,10 @@
+2026-07-21 18:44:43,546 INFO rtdetr_hf.eval: Args: {'model_dir': PosixPath('runs/rtdetr_hf_full/checkpoint-23500'), 'split': 'val', 'output_dir': None, 'iou_threshold': 0.5, 'batch_size': 16, 'smoke': False, 'smoke_per_source': 4}
+2026-07-21 18:47:11,668 INFO rtdetr_hf.eval: Args: {'model_dir': PosixPath('runs/rtdetr_hf_full/checkpoint-23500'), 'split': 'val', 'output_dir': None, 'iou_threshold': 0.5, 'batch_size': 16, 'smoke': False, 'smoke_per_source': 4}
+2026-07-21 19:07:37,484 INFO rtdetr_hf.eval: Computing overall mAP ...
+2026-07-21 19:07:49,979 INFO rtdetr_hf.eval: Overall mAP: {'map': 0.2595844268798828, 'map_50': 0.46869418025016785, 'map_75': 0.25607308745384216, 'map_small': 0.026889970526099205, 'map_medium': 0.14696231484413147, 'map_large': 0.3329470753669739, 'mar_1': 0.21116407215595245, 'mar_10': 0.4260201156139374, 'mar_100': 0.44586580991744995, 'mar_small': 0.19283154606819153, 'mar_medium': 0.34964072704315186, 'mar_large': 0.5146728157997131, 'map_per_class': -1.0, 'mar_100_per_class': -1.0}
+2026-07-21 19:07:56,916 INFO rtdetr_hf.eval: Source xavier (n=64339) mAP: map=0.1859 map_50=0.2987
+2026-07-21 19:08:00,602 INFO rtdetr_hf.eval: Source seth   (n=9287) mAP: map=0.2138 map_50=0.4330
+2026-07-21 19:08:03,202 INFO rtdetr_hf.eval: Source tagus  (n=9568) mAP: map=0.4078 map_50=0.6927
+2026-07-21 19:08:04,295 INFO rtdetr_hf.eval: Overall AP@0.50=0.4684 best_F1=0.5057 @ conf=0.03
+2026-07-21 19:08:05,939 INFO rtdetr_hf.eval: Wrote runs/rtdetr_hf_full/checkpoint-23500/eval_val/eval_summary.json
+2026-07-21 19:08:05,939 INFO rtdetr_hf.eval: Evaluation complete. Outputs in runs/rtdetr_hf_full/checkpoint-23500/eval_val
