@@ -6,8 +6,8 @@ so the comparison doesn't depend on Ultralytics' training internals or its
 AGPL license.
 
 Run:
-    python -m training.rtdetr_hf.train --smoke                # tiny subset, fast sanity check
-    python -m training.rtdetr_hf.train --epochs 50 --batch-size 16
+    python -m training.hugging_face.train --smoke                # tiny subset, fast sanity check
+    python -m training.hugging_face.train --epochs 50 --batch-size 16
 
 Uses HF `Trainer` (not `Accelerate` directly) — Trainer already wraps
 Accelerate internally for multi-GPU/mixed precision, and a single-node
@@ -118,12 +118,27 @@ def main() -> None:
     logger_local.info("Device: %s (%s)", device,
                       torch.cuda.get_device_name(0) if device == "cuda" else "CPU")
 
+    # Resolved here (before model construction), not just before trainer.train(), so a
+    # resume loads its weights via from_pretrained() below -- Trainer's own resume-time
+    # state_dict load does not re-tie RTDetrV2's tied class_embed/bbox_embed parameters
+    # (no tie_weights() call in Trainer._load_from_checkpoint), which silently reinitializes
+    # the detection heads on every resume. from_pretrained() ties them correctly; loading
+    # the correct weights this way first makes Trainer's later (incomplete) reload of the
+    # same checkpoint redundant but harmless -- load_state_dict(strict=False) only
+    # overwrites keys it finds and leaves anything already-correct alone.
+    resume = args.resume_from_checkpoint
+    if resume == "auto":
+        from transformers.trainer_utils import get_last_checkpoint
+        resume = get_last_checkpoint(str(output_dir))
+        logger_local.info("Auto-resume: found checkpoint %s", resume)
+    model_source = resume if resume else args.checkpoint
+
     image_processor = AutoImageProcessor.from_pretrained(args.checkpoint)
 
-    logger_local.info("Loading pretrained model %s (ignore_mismatched_sizes=True: COCO's 80 "
-                      "classes -> our 1 'fish' class)", args.checkpoint)
+    logger_local.info("Loading model weights from %s (ignore_mismatched_sizes=True: COCO's "
+                      "80 classes -> our 1 'fish' class)", model_source)
     model = AutoModelForObjectDetection.from_pretrained(
-        args.checkpoint,
+        model_source,
         id2label=config.ID2LABEL,
         label2id=config.LABEL2ID,
         ignore_mismatched_sizes=True,
@@ -205,32 +220,6 @@ def main() -> None:
         )],
     )
 
-    # Resolved here (before model construction), not just before trainer.train(), so a
-    # resume loads its weights via from_pretrained() below -- Trainer's own resume-time
-    # state_dict load does not re-tie RTDetrV2's tied class_embed/bbox_embed parameters
-    # (no tie_weights() call in Trainer._load_from_checkpoint), which silently reinitializes
-    # the detection heads on every resume. from_pretrained() ties them correctly; loading
-    # the correct weights this way first makes Trainer's later (incomplete) reload of the
-    # same checkpoint redundant but harmless -- load_state_dict(strict=False) only
-    # overwrites keys it finds and leaves anything already-correct alone.
-    resume = args.resume_from_checkpoint
-    if resume == "auto":
-        from transformers.trainer_utils import get_last_checkpoint
-        resume = get_last_checkpoint(str(output_dir))
-        logger_local.info("Auto-resume: found checkpoint %s", resume)
-    model_source = resume if resume else args.checkpoint
-
-    image_processor = AutoImageProcessor.from_pretrained(args.checkpoint)
-
-    logger_local.info("Loading model weights from %s (ignore_mismatched_sizes=True: COCO's "
-                      "80 classes -> our 1 'fish' class)", model_source)
-    model = AutoModelForObjectDetection.from_pretrained(
-        model_source,
-        id2label=config.ID2LABEL,
-        label2id=config.LABEL2ID,
-        ignore_mismatched_sizes=True,
-    )
-    model.to(device)
 
     logger_local.info("Starting training: epochs=%d batch_size=%d lr=%.2e (backbone %.2e) smoke=%s",
                       training_args.num_train_epochs, args.batch_size, args.lr,

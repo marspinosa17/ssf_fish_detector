@@ -6,9 +6,9 @@ Also useful any time the data directory moves — not HPC-specific.
 
 Run:
     python remap_manifest_paths.py \
-        --manifest C:\\Users\\Marcello\\whoissf\\fd_framework\\data\\manifest.csv \
-        --old-root "C:\\Users\\Marcello\\whoissf\\fd_framework\\data" \
-        --new-root "/scratch/marcello/fd_framework/data" \
+        --manifest C:\\path\\to\\ssf_fish_detector\\data\\manifest.csv \
+        --old-root "C:\\path\\to\\ssf_fish_detector\\data" \
+        --new-root "/path/on/hpc/ssf_fish_detector/data" \
         --output manifest_hpc.csv
 
 This is a pure path rewrite -- it does NOT rebuild the manifest or touch
@@ -38,9 +38,9 @@ def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--manifest", required=True, type=Path)
     p.add_argument("--old-root", required=True,
-                    help=r'e.g. "C:\Users\Marcello\whoissf\fd_framework\data"')
+                    help=r'e.g. "C:\path\to\ssf_fish_detector\data"')
     p.add_argument("--new-root", required=True,
-                    help="e.g. /scratch/marcello/fd_framework/data")
+                    help="e.g. /path/on/hpc/ssf_fish_detector/data")
     p.add_argument("--output", required=True, type=Path)
     p.add_argument("--check-exists", action="store_true",
                     help="verify remapped paths exist on disk (run on the HPC side)")

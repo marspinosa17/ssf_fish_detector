@@ -1,40 +1,39 @@
+# Python / editor
+__pycache__/
+*.pyc
+.vscode/
+.claude/
+
+# Raw audio, generated spectrograms, and training run dirs (live on HPC)
+data/SethData/
+data/TagusData/
+data/XavierData/
+data/hawaii/
+data/spectrograms/
+runs/
+*.safetensors
+
+# Generated docs / environment snapshots
 data/MANIFEST_GENERATION_SUMMARY.md
-hpc/miss_delta/
-models/rtdetr/ul_rtdetr_l_v1/pip_freeze.txt
-models/rtdetr/v2L_r1/e1.2/eval_val/F1_curve_seth.png
-models/rtdetr/v2L_r1/e1.2/eval_val/F1_curve_tagus.png
-models/rtdetr/v2L_r1/e1.2/eval_val/F1_curve_xavier.png
-models/rtdetr/v2L_r1/e1.2/eval_val/PR_curve_seth.png
-models/rtdetr/v2L_r1/e1.2/eval_val/PR_curve_tagus.png
-models/rtdetr/v2L_r1/e1.2/eval_val/PR_curve_xavier.png
-models/rtdetr/v2L_r1/e36/eval_val/F1_curve_seth.png
-models/rtdetr/v2L_r1/e36/eval_val/F1_curve_tagus.png
-models/rtdetr/v2L_r1/e36/eval_val/F1_curve_xavier.png
-models/rtdetr/v2L_r1/e36/eval_val/PR_curve_seth.png
-models/rtdetr/v2L_r1/e36/eval_val/PR_curve_tagus.png
-models/rtdetr/v2L_r1/e36/eval_val/PR_curve_xavier.png
+**/pip_freeze.txt
+
+# Analysis outputs (regenerable from hpc/ scripts)
+hpc/results/miss_delta/tile_scores_*.csv
+hpc/results/miss_delta/delta_*.csv
+hpc/results/miss_delta/*_detail.csv
+hpc/results/pr_f1_curves/_tmp_yaml/
+*.fig.pkl
+models/**/miss_analysis*.csv
+models/**/plots_labeled/
+models/**/top_f[np]_tiles_*/individual/
+
+# Per-source PR/F1 curves (pooled curves are tracked)
+models/**/F1_curve_*.png
+models/**/PR_curve_*.png
 models/rtdetr/v2L_r1/e36/eval_val/eval.log
-models/rtdetr/v2L_r2/chk10k/F1_curve_seth.png
-models/rtdetr/v2L_r2/chk10k/F1_curve_tagus.png
-models/rtdetr/v2L_r2/chk10k/F1_curve_xavier.png
-models/rtdetr/v2L_r2/chk10k/PR_curve_seth.png
-models/rtdetr/v2L_r2/chk10k/PR_curve_tagus.png
-models/rtdetr/v2L_r2/chk10k/PR_curve_xavier.png
-models/rtdetr/v2L_r2/final/F1_curve_seth.png
-models/rtdetr/v2L_r2/final/F1_curve_tagus.png
-models/rtdetr/v2L_r2/final/F1_curve_xavier.png
-models/rtdetr/v2L_r2/final/PR_curve_seth.png
-models/rtdetr/v2L_r2/final/PR_curve_tagus.png
-models/rtdetr/v2L_r2/final/PR_curve_xavier.png
+
+# Exploratory miss-analysis plots
 models/yolo/fish_yolo26s/fn_iou_hist.png
-models/yolo/fish_yolo26s/miss_analysis_labeled.csv
-models/yolo/fish_yolo26s/miss_analysis_val_119431.csv
-models/yolo/fish_yolo26s/miss_analysis_val_120167.csv
 models/yolo/fish_yolo26s/overall_status.png
-models/yolo/fish_yolo26s/plots_labeled/
-models/yolo/fish_yolo26s/status_by_duration.png
-models/yolo/fish_yolo26s/status_by_frequency.png
-models/yolo/fish_yolo26s/status_by_source.png
-models/yolo/fish_yolo26s/top_fn_tiles_120582/individual/
+models/yolo/fish_yolo26s/status_by_*.png
 models/yolo/fish_yolo26s/tp_low_conf_confidence_hist.png
-models/yolo/fish_yolo26s_v2_p40/pip_freeze.txt

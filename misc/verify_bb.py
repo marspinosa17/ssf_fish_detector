@@ -2,8 +2,8 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-img_path = r"C:\Users\Marcello\whoissf\fd_framework\data\spectrograms\train\images\xavier_67391492.181018014114_000536000.png"
-txt_path = r"C:\Users\Marcello\whoissf\fd_framework\data\spectrograms\train\labels\xavier_67391492.181018014114_000536000.txt"
+img_path = "data/spectrograms/train/images/xavier_67391492.181018014114_000536000.png"
+txt_path = "data/spectrograms/train/labels/xavier_67391492.181018014114_000536000.txt"
 img = Image.open(img_path)
 W, H = img.size
 

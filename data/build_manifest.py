@@ -36,7 +36,7 @@ from deployment_utils import parse_timestamp, get_deployment_id
 # CONFIG
 # ============================================================================
 
-DATA_ROOT        = Path(os.environ.get("FD_DATA_ROOT", r"C:\Users\Marcello\whoissf\fd_framework\data"))
+DATA_ROOT        = Path(os.environ.get("FD_DATA_ROOT", Path(__file__).resolve().parent))
 XAVIER_DATA_PATH = DATA_ROOT / "XavierData"
 SETH_DATA_PATH   = DATA_ROOT / "SethData"
 TAGUS_DATA_PATH  = DATA_ROOT / "TagusData"

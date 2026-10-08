@@ -4,7 +4,7 @@ from pathlib import Path
 import os
 
 # ── Paths ────────────────────────────────────────────────────────────────────
-DATA_ROOT           = Path(os.environ.get("FD_DATA_ROOT", r"C:\Users\Marcello\whoissf\fd_framework\data"))
+DATA_ROOT           = Path(os.environ.get("FD_DATA_ROOT", Path(__file__).resolve().parents[1] / "data"))
 MANIFEST_PATH       = DATA_ROOT / "manifest.csv"
 OUTPUT_PATH         = DATA_ROOT / "spectrograms"
 

@@ -16,7 +16,7 @@ correct as-is — no additional flip at draw time. This script only asserts
 that invariant; see `_sanity_check_orientation`.
 
 Run:
-    python -m training.rtdetr_hf.predict_samples --model-dir models/rtdetr_hf/final --split val
+    python -m training.hugging_face.predict_samples --model-dir models/rtdetr_hf/final --split val
 """
 from __future__ import annotations
 

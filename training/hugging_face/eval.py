@@ -10,7 +10,7 @@ expected to match pycocotools closely but are not guaranteed bit-identical;
 if that matters, cross-check against a COCOeval run on the same predictions.
 
 Run:
-    python -m training.rtdetr_hf.eval --model-dir models/rtdetr_hf/final --split val
+    python -m training.hugging_face.eval --model-dir models/rtdetr_hf/final --split val
 """
 from __future__ import annotations
 

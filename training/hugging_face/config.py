@@ -9,12 +9,13 @@ from pathlib import Path
 import os
 
 # ── Paths ────────────────────────────────────────────────────────────────────
-DATA_ROOT = Path(os.environ.get("FD_DATA_ROOT", r"C:\Users\Marcello\whoissf\fd_framework\data"))
+REPO_ROOT = Path(__file__).resolve().parents[2]
+DATA_ROOT = Path(os.environ.get("FD_DATA_ROOT", REPO_ROOT / "data"))
 SPECTROGRAM_ROOT = DATA_ROOT / "spectrograms"
 MANIFEST_PATH = SPECTROGRAM_ROOT / "dataset_manifest.csv"
 
 DEFAULT_OUTPUT_DIR = Path(
-    os.environ.get("FD_RTDETR_OUTPUT_ROOT", r"C:\Users\Marcello\whoissf\fd_framework\models\rtdetr_hf")
+    os.environ.get("FD_RTDETR_OUTPUT_ROOT", REPO_ROOT / "models" / "rtdetr_hf")
 )
 
 # ── Dataset ──────────────────────────────────────────────────────────────────

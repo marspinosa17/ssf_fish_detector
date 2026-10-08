@@ -1,0 +1,44 @@
+{
+  "yolo26s": {
+    "val": {
+      "mAP50": 0.6860682442963175,
+      "mAP50-95": 0.3982912960456372,
+      "precision": 0.6697047061296216,
+      "recall": 0.6245625908981048
+    },
+    "test": {
+      "mAP50": 0.35196485913948905,
+      "mAP50-95": 0.1762957080703147,
+      "precision": 0.5067860453408757,
+      "recall": 0.3701476169818426
+    }
+  },
+  "rtdetr_l": {
+    "val": {
+      "mAP50": 0.6993339913657786,
+      "mAP50-95": 0.39577386871655934,
+      "precision": 0.6742665450609739,
+      "recall": 0.6473618955779032
+    },
+    "test": {
+      "mAP50": 0.37018061937574226,
+      "mAP50-95": 0.18057040165824736,
+      "precision": 0.49251511479697363,
+      "recall": 0.3942086967928117
+    }
+  }
+}
+
+
+$ python -c "from ultralytics import RTDETR; RTDETR('runs/ul_rtdetr_l_v1/weights/best.pt').info()"
+rt-detr-l summary: 465 layers, 32,808,131 parameters, 0 gradients, 108.0 GFLOPs
+$ python -c "from ultralytics import YOLO; YOLO('runs/fish_yolo26s/weights/best.pt').info()"
+YOLO26s summary: 260 layers, 9,948,638 parameters, 0 gradients, 22.5 GFLOPs
+
+ model  split  best_f1  best_f1_conf    map50      map    map75       mp       mr
+  yolo    val 0.646255      0.221221 0.686080 0.398276 0.414454 0.669588 0.624494
+  yolo   test 0.427860      0.135135 0.351962 0.176299 0.151798 0.506788 0.370204
+  yolo hawaii 0.440889      0.133133 0.382739 0.175775 0.129296 0.523478 0.380808
+rtdetr    val 0.660540      0.450450 0.699334 0.395773 0.400876 0.674267 0.647362
+rtdetr   test 0.437913      0.358358 0.370181 0.180570 0.148420 0.492515 0.394209
+rtdetr hawaii 0.461154      0.358358 0.437942 0.211786 0.160750 0.501872 0.426546
